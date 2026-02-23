@@ -20,7 +20,7 @@ fn bench_lookups(c: &mut Criterion) {
         let queries: Vec<[u8; 8]> = (0..num_queries).map(|_| rng.random::<[u8; 8]>()).collect();
 
         // Standard filter.
-        let mut standard = StandardBloomFilter::new(n, fp_rate);
+        let mut standard = StandardBloomFilter::new_with_fp_rate(n, fp_rate);
         for key in &members {
             standard.insert(key);
         }
@@ -72,7 +72,7 @@ fn bench_inserts(c: &mut Criterion) {
 
     group.bench_function("standard", |b| {
         b.iter_with_setup(
-            || StandardBloomFilter::new(n, fp_rate),
+            || StandardBloomFilter::new_with_fp_rate(n, fp_rate),
             |mut filter| {
                 for key in &keys {
                     filter.insert(key);

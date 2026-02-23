@@ -176,7 +176,7 @@ mod tests {
         let target_fpr = 0.01;
         let mut rng = rand::rng();
 
-        let mut standard = StandardBloomFilter::new(n, target_fpr);
+        let mut standard = StandardBloomFilter::new_with_fp_rate(n, target_fpr);
         let mut blocked = BlockedBloomFilter::new(n, target_fpr);
 
         let members = random_keys(&mut rng, n);
